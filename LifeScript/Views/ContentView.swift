@@ -6,10 +6,13 @@ struct ContentView: View {
     )
     @State private var isPaused = false
     @State private var showMenu = false
+    @State private var showSettings = false
 
     var body: some View {
         if showMenu {
             MainMenuView()
+        } else if showSettings {
+            SettingsView()
         } else {
             ZStack {
                 VStack(spacing: 20) {
@@ -65,55 +68,11 @@ struct ContentView: View {
                 .blur(radius: isPaused ? 4 : 0)
                 
                 if isPaused {
-                    Color.black.opacity(0.4)
-                        .ignoresSafeArea()
-                    
-                    VStack(spacing: 20) {
-                        Text("Paused")
-                            .font(.title)
-                            .foregroundColor(.black)
-                        
-                        Button("Resume") {
-                            isPaused = false
-                        }
-                        .frame(width: 70)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        
-                        Button("Save") {
-                            //Save Logic
-                        }
-                        .frame(width: 70)
-                        .padding()
-                        .background(Color.yellow)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        
-                        Button("Options") {
-                            //Options Logic
-                        }
-                        .frame(width: 70)
-                        .padding()
-                        .background(Color.orange)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        
-                        Button("Exit") {
-                            showMenu = true
-                        }
-                        .frame(width: 70)
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                    }
-                    .frame(width: 300, height: 400)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(25)
-                    .shadow(radius: 10)
-                    .padding()
+                    PauseOverlay(
+                        onResume: { isPaused = false },
+                        onSettings: { showSettings = true },
+                        onExit: { showMenu = true }
+                    )
                 }
             }
         }

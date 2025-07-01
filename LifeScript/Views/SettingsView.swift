@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View{
     @State private var showMenu = false
+    @State private var soundEnabled = true
     
     var body: some View{
         if showMenu {
@@ -12,9 +13,10 @@ struct SettingsView: View{
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
-                Button("Sound Effeects"){
-                    //Toggle Effect Later
-                }
+                Toggle("Sound Effects", isOn: $soundEnabled)
+                    .toggleStyle(SwitchToggleStyle(tint: .green)) // optional color
+                    .padding()
+                    .frame(width: 200)
                 
                 Spacer()
                 
