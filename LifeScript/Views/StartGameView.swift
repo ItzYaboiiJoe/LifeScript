@@ -1,21 +1,24 @@
 import SwiftUI
 
-struct MainMenuView: View {
+struct StartGameView: View {
     @State private var showGame = false
-    @State private var showSettings = false
-
+    @State private var showMenu = false
+    
     var body: some View {
         if showGame {
-            StartGameView()
-        } else if showSettings {
-            SettingsView()
-        }else {
+            ContentView()
+        } else if showMenu {
+            MainMenuView()
+        }
+        else {
             VStack(spacing: 40) {
                 Text("🎮 LifeScript")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-
-                Button("Start Game") {
+                
+                Spacer()
+                
+                Button("Start New Life") {
                     showGame = true
                 }
                 .padding()
@@ -23,22 +26,22 @@ struct MainMenuView: View {
                 .foregroundColor(.white)
                 .cornerRadius(10)
                 
-                Button("Settings") {
-                    showSettings = true
+                Button("Load Previous Life") {
+                    // Load Saved Game Logic
                 }
                 .padding()
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(10)
                 
-                Button("Quit"){
-                    //Quit Logic Later
+                Button("Back") {
+                    showMenu = true
                 }
                 .padding()
-                .background(Color.red)
+                .background(Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(10)
-
+                
                 Spacer()
             }
             .padding()
@@ -47,5 +50,5 @@ struct MainMenuView: View {
 }
 
 #Preview {
-    MainMenuView()
+    StartGameView()
 }
