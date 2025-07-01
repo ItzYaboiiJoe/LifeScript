@@ -2,10 +2,13 @@ import SwiftUI
 
 struct MainMenuView: View {
     @State private var showGame = false
+    @State private var showSettings = false
 
     var body: some View {
         if showGame {
             ContentView()
+        } else if showSettings {
+            SettingsView()
         } else {
             VStack(spacing: 40) {
                 Text("🎮 LifeScript")
@@ -21,7 +24,7 @@ struct MainMenuView: View {
                 .cornerRadius(10)
                 
                 Button("Settings") {
-                    //Settings File Later
+                    showSettings = true
                 }
                 .padding()
                 .background(Color.blue)
