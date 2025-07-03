@@ -2,12 +2,10 @@ import SwiftUI
 
 class GameManager: ObservableObject {
     @Published var player: Player
-
     @Published var log: [String] = []
 
     init(player: Player) {
         self.player = player
-        log.append("Welcome, \(player.name)!")
     }
 
     func ageUp() {

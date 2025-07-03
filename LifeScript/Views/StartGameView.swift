@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct StartGameView: View {
-    @State private var showGame = false
+    @State private var newLife = false
     @State private var showMenu = false
     
     var body: some View {
-        if showGame {
-            ContentView()
+        if newLife {
+            InsertPlayerName()
         } else if showMenu {
             MainMenuView()
         }
@@ -19,7 +19,7 @@ struct StartGameView: View {
                 Spacer()
                 
                 Button("Start New Life") {
-                    showGame = true
+                    newLife = true
                 }
                 .padding()
                 .background(Color.green)
