@@ -7,6 +7,7 @@ struct ContentView: View {
     @State private var isPaused = false
     @State private var showMenu = false
     @State private var showSettings = false
+    @State private var showSaveMessage = false
 
     init(playerName: String) {
         self.playerName = playerName
@@ -78,8 +79,30 @@ struct ContentView: View {
                     PauseOverlay(
                         onResume: { isPaused = false },
                         onSettings: { showSettings = true },
-                        onExit: { showMenu = true }
+                        onExit: { showMenu = true },
+                        onSave: {
+                            game.saveGame()
+                            showSaveMessage = true
+                            isPaused = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                showSaveMessage = false
+                            }
+                        }
                     )
+                }
+
+                if showSaveMessage {
+                    VStack {
+                        Text("✅ Game Saved")
+                            .padding()
+                            .background(Color.black.opacity(0.8))
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .padding(.top, 40)
+                        Spacer()
+                    }
+                    .transition(.move(edge: .top))
+                    .animation(.easeInOut, value: showSaveMessage)
                 }
             }
         }

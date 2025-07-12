@@ -23,5 +23,17 @@ class GameManager: ObservableObject {
 
         log.append("Happiness: \(player.happiness), Attractiveness: \(player.attractiveness)")
     }
+    
+    func saveGame() {
+        let playerData: [String: Any] = [
+            "name": player.name,
+            "age": player.age,
+            "happiness": player.happiness,
+            "knowledge": player.knowledge,
+            "attractiveness": player.attractiveness
+        ]
+
+        UserDefaults.standard.set(playerData, forKey: "savedPlayer")
+    }
 }
 

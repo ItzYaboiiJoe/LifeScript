@@ -4,6 +4,7 @@ struct PauseOverlay: View {
     var onResume: () -> Void
     var onSettings: () -> Void
     var onExit: () -> Void
+    var onSave: () -> Void
 
     var body: some View {
         Color.black.opacity(0.4)
@@ -24,7 +25,7 @@ struct PauseOverlay: View {
             .cornerRadius(10)
 
             Button("Save") {
-                // Optional: implement here or pass in
+                onSave()
             }
             .frame(width: 200)
             .padding()
@@ -44,7 +45,7 @@ struct PauseOverlay: View {
 //            .foregroundColor(.white)
 //            .cornerRadius(10)
 
-            Button("Exit") {
+            Button("Exit to Menu") {
                 onExit()
             }
             .frame(width: 200)
@@ -61,5 +62,5 @@ struct PauseOverlay: View {
     }
 }
 #Preview {
-    PauseOverlay(onResume: { }, onSettings: { }, onExit: { })
+    PauseOverlay(onResume: { }, onSettings: { }, onExit: { }, onSave: {})
 }
