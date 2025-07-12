@@ -6,7 +6,7 @@ struct InsertPlayerName: View {
 
     var body: some View {
         if startGame {
-            ContentView()
+            ContentView(playerName: playerName)
         } else {
             VStack {
                 Text("🎮 LifeScript")
@@ -26,8 +26,11 @@ struct InsertPlayerName: View {
                         .frame(width: 200)
 
                     Button("Start") {
-                        startGame = true
+                        if !playerName.trimmingCharacters(in: .whitespaces).isEmpty {
+                            startGame = true
+                        }
                     }
+                    .disabled(playerName.trimmingCharacters(in: .whitespaces).isEmpty)
                     .frame(width: 100)
                     .padding()
                     .background(Color.green)

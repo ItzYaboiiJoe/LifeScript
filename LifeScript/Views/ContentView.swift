@@ -1,13 +1,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var game = GameManager(
-        player: Player(name: "Alex", happiness: 80, knowledge: 50, attractiveness: 75)
-    )
+    let playerName: String
+    @StateObject private var game: GameManager
+    
     @State private var isPaused = false
     @State private var showMenu = false
     @State private var showSettings = false
 
+    init(playerName: String) {
+        self.playerName = playerName
+        _game = StateObject(wrappedValue: GameManager(
+            player: Player(name: playerName, happiness: 80, knowledge: 50, attractiveness: 75)
+        ))
+    }
+    
     var body: some View {
         if showMenu {
             MainMenuView()
@@ -80,5 +87,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(playerName: "")
 }

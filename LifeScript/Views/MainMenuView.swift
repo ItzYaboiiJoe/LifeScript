@@ -15,6 +15,8 @@ struct MainMenuView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
 
+                Spacer()
+
                 Button("Start Game") {
                     showGame = true
                 }
@@ -28,14 +30,6 @@ struct MainMenuView: View {
                 }
                 .padding()
                 .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                
-                Button("Quit"){
-                    //Quit Logic Later
-                }
-                .padding()
-                .background(Color.red)
                 .foregroundColor(.white)
                 .cornerRadius(10)
 
