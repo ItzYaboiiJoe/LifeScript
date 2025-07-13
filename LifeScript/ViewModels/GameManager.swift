@@ -21,7 +21,7 @@ class GameManager: ObservableObject {
         player.attractiveness += attractivenessChange
         player.knowledge += knowledgeChange
 
-        log.append("Happiness: \(player.happiness), Attractiveness: \(player.attractiveness)")
+        log.append("Happiness: \(player.happiness), Knowledge: \(player.knowledge), Attractiveness: \(player.attractiveness)")
     }
     
     func saveGame() {
@@ -30,10 +30,30 @@ class GameManager: ObservableObject {
             "age": player.age,
             "happiness": player.happiness,
             "knowledge": player.knowledge,
-            "attractiveness": player.attractiveness
+            "attractiveness": player.attractiveness,
+            "log": log
         ]
 
         UserDefaults.standard.set(playerData, forKey: "savedPlayer")
+    }
+    
+    
+    static func loadGame() -> GameManager? {
+        guard let data = UserDefaults.standard.dictionary(forKey: "savedPlayer"),
+              let name = data["name"] as? String,
+              let age = data["age"] as? Int,
+              let happiness = data["happiness"] as? Int,
+              let knowledge = data["knowledge"] as? Int,
+              let attractiveness = data["attractiveness"] as? Int,
+              let log = data["log"] as? [String]
+        else {
+            return nil
+        }
+
+        let player = Player(name: name, age: age, happiness: happiness, knowledge: knowledge, attractiveness: attractiveness)
+        let manager = GameManager(player: player)
+        manager.log = log
+        return manager
     }
 }
 

@@ -16,6 +16,11 @@ struct ContentView: View {
         ))
     }
     
+    init(game: GameManager) {
+        self.playerName = game.player.name
+        _game = StateObject(wrappedValue: game)
+    }
+    
     var body: some View {
         if showMenu {
             MainMenuView()

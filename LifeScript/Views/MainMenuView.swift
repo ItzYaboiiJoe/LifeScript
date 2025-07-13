@@ -20,6 +20,7 @@ struct MainMenuView: View {
                 Button("Start Game") {
                     showGame = true
                 }
+                .frame(width: 200)
                 .padding()
                 .background(Color.green)
                 .foregroundColor(.white)
@@ -28,6 +29,7 @@ struct MainMenuView: View {
                 Button("Settings") {
                     showSettings = true
                 }
+                .frame(width: 200)
                 .padding()
                 .background(Color.blue)
                 .foregroundColor(.white)
